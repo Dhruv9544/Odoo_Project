@@ -10,10 +10,13 @@ import { Dashboard as AdminDashboard } from "./pages/Admin/Dashboard";
 import AddBooks from "./pages/Librarian/AddBooks";
 import { LibrarianHeader } from "./components/Librarian/LibrarianHeader";
 import AddLibrarianForm from "./pages/Admin/AddLibrarianForm";
+import { loginLoader, verifyLoader } from "./loaders/verifyLoader";
+
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
+      loader: loginLoader,
       element: <Login />,
     },
     {
@@ -63,7 +66,7 @@ const App = () => {
     },
     {
       path: "/test",
-      element: <AddBooks />,
+      element: <AddLibrarianForm />,
       errorElement: <ErrorPage />,
     },
   ]);

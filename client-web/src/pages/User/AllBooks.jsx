@@ -55,7 +55,7 @@ const AllBooks = () => {
                     ) : (
                         book.map((item, index) => (
                             <div
-                                className="bg-white rounded-lg shadow-lg overflow-hidden"
+                                className="bg-white min-w-[32%] max-w-[32%] rounded-lg shadow-lg overflow-hidden"
                                 key={index}
                             >
                                 <img

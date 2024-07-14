@@ -1,8 +1,12 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddBooks = () => {
+  const navigate = useNavigate();
+
   const initialValues = {
     isbn: "",
     title: "",
@@ -46,8 +50,41 @@ const AddBooks = () => {
       ),
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     console.log("Form data", values);
+
+    const formData = new FormData();
+    formData.append("image", values.image);
+    formData.append("ISBN", values.name);
+    formData.append("title", values.title);
+    formData.append("author", values.author);
+    formData.append("genre", values.genre);
+    formData.append("quantity", values.quantity);
+    formData.append("publisher", values.publisher);
+    formData.append("year", values.year);
+    formData.append("available", values.available);
+    console.log(values);
+    console.log("FormData contents:");
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+    const res = await fetch("http://localhost:9999/library/addBook", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+      method: "POST",
+      body: formData,
+    });
+    if (res.status == 201) {
+      Swal.fire({
+        title: "Success",
+        text: "Item processed successfully",
+        icon: "success",
+      }).then(() => {
+        navigate("/user/sell");
+      });
+    }
+    console.log(res);
   };
 
   const handleImageChange = (event, setFieldValue) => {

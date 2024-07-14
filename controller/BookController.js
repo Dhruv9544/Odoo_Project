@@ -3,8 +3,13 @@ const catchAsync = require("../utils/catchAsync");
 
 module.exports.addBook = catchAsync(async (req, res, next) => {
   const newBook = new bookModel(req.body);
-
   const book = await newBook.save();
+
+  const url = `http://localhost:9999/uploads/${req.file.originalname}`;
+
+  book.image = url;
+  await book.save();
+
   res.status(200).json({ book });
 });
 

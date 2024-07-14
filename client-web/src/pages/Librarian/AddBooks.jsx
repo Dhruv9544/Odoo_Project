@@ -17,6 +17,7 @@ const AddBooks = () => {
     quantity: "",
     available: false,
     image: null,
+    price: "",
   };
 
   const validationSchema = Yup.object({
@@ -48,6 +49,9 @@ const AddBooks = () => {
           (value &&
             ["image/jpg", "image/jpeg", "image/png"].includes(value.type))
       ),
+    price: Yup.number()
+      .required("Quantity is required")
+      .min(1, "Quantity must be at least 1"),
   });
 
   const onSubmit = async (values) => {
@@ -65,9 +69,7 @@ const AddBooks = () => {
     formData.append("available", values.available);
     console.log(values);
     console.log("FormData contents:");
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
+
     const res = await fetch("http://localhost:9999/library/addBook", {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -81,7 +83,7 @@ const AddBooks = () => {
         text: "Item processed successfully",
         icon: "success",
       }).then(() => {
-        navigate("/user/sell");
+        navigate("/user");
       });
     }
     console.log(res);
@@ -277,6 +279,25 @@ const AddBooks = () => {
               />
               <ErrorMessage
                 name="image"
+                component="div"
+                className="text-red-500 text-sm mt-1"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="price"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Price
+              </label>
+              <Field
+                type="number"
+                id="price"
+                name="price"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              />
+              <ErrorMessage
+                name="price"
                 component="div"
                 className="text-red-500 text-sm mt-1"
               />

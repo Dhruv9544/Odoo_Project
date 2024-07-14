@@ -52,8 +52,9 @@ const AllBooks = () => {
               className="bg-white rounded-lg shadow-lg overflow-hidden"
               key={index}
             >
+              {console.log(item)}
               <img
-                src={`http://localhost:9999/uploads/${item.images[0]}`}
+                src={`${item.image}`}
                 className="w-full h-48 object-contain"
                 alt="Furniture"
               />
@@ -61,9 +62,7 @@ const AllBooks = () => {
                 <Link to={`${item._id}`}>
                   <h2 className="text-lg font-light">{item.title}</h2>
                   <p className="text-gray-600">{item.publisher}</p>
-                  <p className="font-bold">
-                    Rent Price: {item.rentalPrice / 100}
-                  </p>
+                  <p className="font-bold">Rent Price: {item.year / 100}</p>
                 </Link>
               </div>
             </div>

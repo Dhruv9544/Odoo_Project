@@ -5,12 +5,14 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 //dbconnection
 require("./config/dbconfig").getDbconnection();
 const userRoutes = require("./routes/userRoutes");
+const bookRoutes = require("./routes/bookRoutes");
 const app = express();
 app.use(cors());
 app.use(express.static("public"));
 app.use(express.json());
 
 app.use("/auth", userRoutes);
+app.use("", bookRoutes);
 
 const PORT = process.env.PORT || 9999;
 app.listen(PORT, () => {

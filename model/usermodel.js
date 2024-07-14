@@ -22,6 +22,9 @@ const userSchema = new mongoose.Schema({
   contact: {
     type: String,
   },
+  libraryname: {
+    type: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

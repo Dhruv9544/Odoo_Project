@@ -81,6 +81,27 @@ module.exports.login = async (req, res, next) => {
   }
 };
 
+module.exports.addLibrerian = async (req, res, next) => {
+  try {
+    const { username, email, password, libraryname } = req.body;
+
+    const librarian = new userModel({
+      username,
+      password,
+      role: "Librarian",
+      email,
+      libraryname,
+    });
+
+    await librarian.save();
+    res
+      .status(201)
+      .json({ message: "Librarian added successfully", librarian });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports.protect = async (req, res, next) => {
   try {
     // 1. Get token and check if it's there

@@ -1,5 +1,6 @@
 const { timeStamp } = require("console");
 const mongoose = require("mongoose");
+const { type } = require("os");
 
 const paymentSchema = new mongoose.Schema(
   {
@@ -26,6 +27,10 @@ const paymentSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
+    },
+    session_id: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true }

@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Outlet, NavLink, Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../assets/logo.jpg";
+import { FaMoneyCheckAlt } from "react-icons/fa";
+import { FaMoneyBillTrendUp } from "react-icons/fa6";
 export const LibrarianHeader = () => {
   const [loading, setloading] = useState(false);
 
   useEffect(() => {
     if (
       localStorage.getItem("token") == undefined ||
-      localStorage.getItem("role") != "admin"
+      localStorage.getItem("role") != "Librarian"
     ) {
       window.location.href = "/";
     } else {
@@ -48,83 +50,35 @@ export const LibrarianHeader = () => {
             to={"/admin"}
             className="text-white text-3xl  first-letter:font-semibold uppercase hover:text-gray-300 "
           >
-            Admin
+            Librarian
           </Link>
         </div>
         <nav className=" text-base font-semibold pt-3 overflow-y-scroll h-4/6">
-          <div className=" hover:shadow-gray-400 hover:shadow-md">
-            <Link
-              to={"/admin"}
-              className="flex items-center active-nav-link text-white py-4 pl-6 nav-item gap-2 focus:outline-none focus:shadow-md focus:shadow-gray-500"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"
-                />
-              </svg>
-              Dashboard
-            </Link>
-          </div>
-          <div className=" hover:shadow-gray-400 hover:shadow-md">
+          <div className=" hover:shadow-white hover:shadow-md">
             <Link
               to={"profile"}
               className="flex items-center active-nav-link text-white py-4 pl-6 nav-item gap-2 focus:outline-none focus:shadow-md focus:shadow-gray-500"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                data-slot="icon"
-                class="w-6 h-6"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M18.685 19.097A9.723 9.723 0 0 0 21.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 0 0 3.065 7.097A9.716 9.716 0 0 0 12 21.75a9.716 9.716 0 0 0 6.685-2.653Zm-12.54-1.285A7.486 7.486 0 0 1 12 15a7.486 7.486 0 0 1 5.855 2.812A8.224 8.224 0 0 1 12 20.25a8.224 8.224 0 0 1-5.855-2.438ZM15.75 9a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-                  clip-rule="evenodd"
-                />
-              </svg>
+              <FaMoneyCheckAlt />
               Profile
             </Link>
           </div>
-          <div className="hover:shadow-gray-400 hover:shadow-md">
+          <div className=" hover:shadow-white hover:shadow-md">
             <Link
-              to={"payment"}
+              to={"addbooks"}
               className="flex items-center active-nav-link text-white py-4 pl-6 nav-item gap-2 focus:outline-none focus:shadow-md focus:shadow-gray-500"
             >
-              <span className="inline-flex items-center">
-                <span
-                  className="pi pi-credit-card mr-2"
-                  style={{
-                    fontSize: "1.4rem",
-                  }}
-                ></span>{" "}
-                Payment
-              </span>
+              <FaMoneyCheckAlt />
+              Add Books
             </Link>
           </div>
-          <div className="hover:shadow-gray-400 hover:shadow-md">
+          <div className=" hover:shadow-white hover:shadow-md">
             <Link
-              to={"analysis"}
+              to={"books"}
               className="flex items-center active-nav-link text-white py-4 pl-6 nav-item gap-2 focus:outline-none focus:shadow-md focus:shadow-gray-500"
             >
-              <span className="inline-flex items-center">
-                <span
-                  className="pi pi-chart-bar mr-2"
-                  style={{
-                    fontSize: "1.4rem",
-                  }}
-                ></span>
-                Analysis
-              </span>
+              <FaMoneyBillTrendUp />
+              Books
             </Link>
           </div>
         </nav>

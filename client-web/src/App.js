@@ -15,6 +15,7 @@ import Librarian from "./pages/Admin/Librarian";
 import AllBooks from "./pages/User/AllBooks";
 import BookMainpage from "./pages/User/BookMainpage";
 import Checkout from "./pages/User/Checkout";
+import Analysis from "./components/Admin/Analysis/Analysis";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -62,6 +63,11 @@ const App = () => {
         {
           path: "librarian",
           element: <Librarian />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "analysis",
+          element: <Analysis />,
           errorElement: <ErrorPage />,
         },
       ],

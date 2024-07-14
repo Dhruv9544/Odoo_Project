@@ -33,19 +33,24 @@ module.exports.PaymentsById = catchAsync(async (req, res, next) => {
         console.log("Generated objectId:", objectId);
 
         // Fetch payments where endDate is less than today
-        const paymentsLessThanToday = await paymentModel.find({
-            user: objectId,
-            endDate: { $lt: new Date() },
-        });
-
+        const paymentsLessThanToday = await paymentModel
+            .find({
+                user: objectId,
+                endDate: { $lt: new Date() },
+            })
+            .populate("user")
+            .populate("book");
         // Debugging: Check the query for payments less than today
         console.log("Payments less than today:", paymentsLessThanToday);
 
         // Fetch payments where endDate is greater than or equal to today
-        const paymentsGreaterThanToday = await paymentModel.find({
-            user: objectId,
-            endDate: { $gte: new Date() },
-        });
+        const paymentsGreaterThanToday = await paymentModel
+            .find({
+                user: objectId,
+                endDate: { $gte: new Date() },
+            })
+            .populate("user")
+            .populate("book");
 
         // Debugging: Check the query for payments greater than or equal to today
         console.log(

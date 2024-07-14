@@ -31,7 +31,7 @@ function History() {
             <div>Current Record</div>
             <Datatable
                 array={datatableArray}
-                data={data.greaterThanToday}
+                data={data.greaterThanOrEqualToToday}
             ></Datatable>
         </div>
     );

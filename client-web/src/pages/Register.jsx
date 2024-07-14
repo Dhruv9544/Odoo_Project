@@ -9,9 +9,7 @@ import { Dropdown } from "primereact/dropdown";
 import "primereact/resources/themes/saga-blue/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
-import statesData from "../utils/states-and-districts.json"; // Adjust the import path
 import { fetchPost } from "../apis/fetch";
-import logo from "../assets/logo.jpg";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -76,9 +74,7 @@ const Register = () => {
             <div className="flex flex-wrap items-center m-4">
                 <div className="hidden w-full xl:block xl:w-1/2 min-h-screen m-auto justify-center items-center">
                     <div className="py-[10.375rem] px-[6.5rem] text-center">
-                        <span className="inline-block mx-auto">
-                            {<img src={logo} alt="symbol" />}
-                        </span>
+                        <span className="inline-block mx-auto"></span>
                     </div>
                 </div>
 

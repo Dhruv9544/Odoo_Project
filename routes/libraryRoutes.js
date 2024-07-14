@@ -1,4 +1,6 @@
 const libraryController = require("../controller/LibraryController");
+const bookController = require("../controller/BookController");
+
 const multer = require("multer");
 
 const express = require("express");
@@ -15,5 +17,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/addBook", upload.single("image"), libraryController.addBook);
+router.post("/addBook", upload.single("image"), bookController.addBook);
 router.get("/alllibrary", libraryController.getLibrary);
+
+module.exports = router;

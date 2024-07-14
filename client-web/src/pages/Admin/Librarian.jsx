@@ -10,7 +10,7 @@ function Librarian() {
         { field: "index", header: "Sr no." },
         { field: "username", header: "Username" },
         { field: "email", header: "Email" },
-        { field: "phone", header: "Phone No." },
+        { field: "contact", header: "Phone No." },
         { field: "libraryname", header: "Library Name" },
     ];
     const [visibility, setVisibility] = useState(false);
@@ -42,7 +42,14 @@ function Librarian() {
                             setVisibility(false);
                         }}
                     >
-                        <AddLibrarianForm></AddLibrarianForm>
+                        <AddLibrarianForm
+                            getlibrary={() => {
+                                getLibrary();
+                            }}
+                            visible={() => {
+                                setVisibility(false);
+                            }}
+                        ></AddLibrarianForm>
                     </Dialog>
                     <div className="flex justify-end">
                         <Button

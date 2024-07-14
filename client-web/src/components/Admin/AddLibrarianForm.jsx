@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { fetchPost } from "../../apis/fetch";
 import { useNavigate } from "react-router-dom";
 
-const AddLibrarianForm = () => {
+const AddLibrarianForm = ({ getlibrary, visible }) => {
     const navigate = useNavigate();
     const initialValues = {
         username: "",
@@ -31,18 +31,18 @@ const AddLibrarianForm = () => {
             email: values.email,
             password: values.password,
             libraryname: values.library,
+            contact: values.contact,
         };
         const res = await fetchPost(
             "auth/addLibrarian",
             null,
             JSON.stringify(data)
         );
-        if (res.status == "success") {
-            localStorage.setItem("token", res.token);
-            localStorage.setItem("role", res.user.role);
+        if (res) {
+            getlibrary();
+            visible();
+            resetForm();
         }
-        // navigate("/");
-        // resetForm();
     };
 
     return (

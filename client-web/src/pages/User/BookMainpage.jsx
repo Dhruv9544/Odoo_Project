@@ -1,16 +1,17 @@
 import { useParams } from "react-router-dom";
 import { fetchGet } from "../../apis/fetch";
 import { useEffect, useState } from "react";
+import Payment from "../Payment";
 
 const BookMainpage = () => {
   const urlParams = useParams();
   // console.log(urlParams);
-  const [furniture, setFurniture] = useState([]);
+  const [book, setBook] = useState([]);
   const [loading, setloading] = useState(false);
 
   async function getAllFurniture() {
     const response = await fetchGet(`getBook?_id=${urlParams.name}`);
-    setFurniture(response);
+    setBook(response);
     setloading(true);
     console.log(response);
   }
@@ -26,24 +27,25 @@ const BookMainpage = () => {
           <div class="flex flex-col lg:flex-row items-center lg:items-start">
             <div class="flex-1 p-4">
               <h1 class="text-4xl font-bold text-black mb-4">
-                Name: {furniture[0].title}
+                Name: {book[0].title}
               </h1>
               <p class="text-lg text-gray-500 flex items-center mb-4">
-                Author: {furniture[0].author}
+                Author: {book[0].author}
               </p>
               <p class="text-black-600 font-semibold mb-4">
-                Publisher: {furniture[0].publisher}
+                Publisher: {book[0].publisher}
               </p>
               <p class="text-black-600 font-semibold mb-4">
-                Quantity: {furniture[0].quantity}
+                Quantity: {book[0].quantity}
               </p>
               <p class="text-xl text-gray-900 font-bold mb-6">
-                Price: ₹ {furniture[0].year / 100}
+                Price: ₹ {book[0].price}
               </p>
+              <Payment book={book[0]}></Payment>
             </div>
             <div class="flex-1 p-4 flex justify-center items-center">
               <img
-                src={`${furniture[0].image}`}
+                src={`${book[0].image}`}
                 alt="Furniture Image"
                 class="w-auto h-96 max-w-full object-cover rounded-lg shadow-lg"
               />

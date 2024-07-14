@@ -59,7 +59,7 @@ const AddBooks = () => {
 
     const formData = new FormData();
     formData.append("image", values.image);
-    formData.append("ISBN", values.name);
+    formData.append("ISBN", values.isbn);
     formData.append("title", values.title);
     formData.append("author", values.author);
     formData.append("genre", values.genre);
@@ -67,6 +67,7 @@ const AddBooks = () => {
     formData.append("publisher", values.publisher);
     formData.append("year", values.year);
     formData.append("available", values.available);
+    formData.append("price", values.price);
     console.log(values);
     console.log("FormData contents:");
 

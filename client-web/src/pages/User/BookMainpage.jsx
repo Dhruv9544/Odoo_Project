@@ -4,25 +4,21 @@ import { useEffect, useState } from "react";
 
 const BookMainpage = () => {
   const urlParams = useParams();
-  console.log(urlParams);
+  // console.log(urlParams);
   const [furniture, setFurniture] = useState([]);
   const [loading, setloading] = useState(false);
 
   async function getAllFurniture() {
-    const response = await fetchGet(
-      `furniture/getFurniture?_id=${urlParams.name}`,
-      localStorage.getItem("token")
-    );
-    if (response.status == "success") {
-      setFurniture(response.furnitures);
-      setloading(true);
-    }
+    const response = await fetchGet(`getBook?_id=${urlParams.name}`);
+    setFurniture(response);
+    setloading(true);
     console.log(response);
   }
   useEffect(() => {
     getAllFurniture();
     return () => {};
   }, []);
+
   return (
     loading && (
       <div>
@@ -30,22 +26,24 @@ const BookMainpage = () => {
           <div class="flex flex-col lg:flex-row items-center lg:items-start">
             <div class="flex-1 p-4">
               <h1 class="text-4xl font-bold text-black mb-4">
-                Name: {furniture[0].name}
+                Name: {furniture[0].title}
               </h1>
               <p class="text-lg text-gray-500 flex items-center mb-4">
-                Location: {furniture[0].ownerId.district},{" "}
-                {furniture[0].ownerId.state}
+                Author: {furniture[0].author}
               </p>
               <p class="text-black-600 font-semibold mb-4">
-                Description: {furniture[0].description}
+                Publisher: {furniture[0].publisher}
+              </p>
+              <p class="text-black-600 font-semibold mb-4">
+                Quantity: {furniture[0].quantity}
               </p>
               <p class="text-xl text-gray-900 font-bold mb-6">
-                Price: ₹ {furniture[0].rentalPrice / 100}
+                Price: ₹ {furniture[0].year / 100}
               </p>
             </div>
             <div class="flex-1 p-4 flex justify-center items-center">
               <img
-                src={`http://localhost:9999/uploads/${furniture[0].images[0]}`}
+                src={`${furniture[0].image}`}
                 alt="Furniture Image"
                 class="w-auto h-96 max-w-full object-cover rounded-lg shadow-lg"
               />

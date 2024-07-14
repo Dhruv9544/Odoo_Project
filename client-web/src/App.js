@@ -1,7 +1,27 @@
-import "./App.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ErrorPage from "./pages/ErrorPage";
+import { PrimeReactProvider } from "primereact/api";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+const App = () => {
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <Login />,
+            errorElement: <ErrorPage />,
+        },
+        {
+            path: "/register",
+            element: <Register />,
+            errorElement: <ErrorPage />,
+        },
+    ]);
 
-function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
-}
+    return (
+        <PrimeReactProvider>
+            <RouterProvider router={router}></RouterProvider>
+        </PrimeReactProvider>
+    );
+};
 
 export default App;

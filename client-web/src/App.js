@@ -7,7 +7,9 @@ import { Header } from "./components/User/Header";
 import ErrorPage from "./pages/ErrorPage";
 import { Dashboard } from "./pages/User/Dashboard";
 import { Dashboard as AdminDashboard } from "./pages/Admin/Dashboard";
-
+import AddBooks from "./pages/Librarian/AddBooks";
+import { LibrarianHeader } from "./components/Librarian/LibrarianHeader";
+import AddLibrarianForm from "./pages/Admin/AddLibrarianForm";
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -40,7 +42,29 @@ const App = () => {
           element: <AdminDashboard />,
           errorElement: <ErrorPage />,
         },
+        {
+          path: "addLibrarian",
+          element: <AddLibrarianForm />,
+          errorElement: <ErrorPage />,
+        },
       ],
+    },
+    {
+      path: "/librarian",
+      element: <LibrarianHeader />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "addbooks",
+          element: <AddBooks />,
+          errorElement: <ErrorPage />,
+        },
+      ],
+    },
+    {
+      path: "/test",
+      element: <AddBooks />,
+      errorElement: <ErrorPage />,
     },
   ]);
 

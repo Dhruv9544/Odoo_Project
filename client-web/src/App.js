@@ -14,6 +14,7 @@ import { loginLoader, verifyLoader } from "./loaders/verifyLoader";
 import Librarian from "./pages/Admin/Librarian";
 import AllBooks from "./pages/User/AllBooks";
 import BookMainpage from "./pages/User/BookMainpage";
+import Checkout from "./pages/User/Checkout";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -80,6 +81,11 @@ const App = () => {
     {
       path: "/test",
       element: <AddBooks />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/payment_success",
+      element: <Checkout />,
       errorElement: <ErrorPage />,
     },
   ]);

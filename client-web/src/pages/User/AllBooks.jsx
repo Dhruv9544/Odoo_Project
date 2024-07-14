@@ -7,15 +7,16 @@ const AllBooks = () => {
     const [book, setBook] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [search, setSearch] = useState(null);
 
     useEffect(() => {
         getAllBook();
-    }, []);
+    }, [search]);
 
     async function getAllBook() {
         setLoading(true);
         const response = await fetchGet(
-            `getBook`,
+            `getBook?${selectedFilter}=${search}`,
             localStorage.getItem("token")
         );
         setBook(response); // assuming response.data contains the book array
@@ -37,6 +38,7 @@ const AllBooks = () => {
                             type="text"
                             placeholder="Search book"
                             className="border p-2 rounded w-full"
+                            onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
                     <div className="flex-1">
@@ -55,7 +57,7 @@ const AllBooks = () => {
                     ) : (
                         book.map((item, index) => (
                             <div
-                                className="bg-white min-w-[32%] max-w-[32%] rounded-lg shadow-lg overflow-hidden"
+                                className="bg-white rounded-lg shadow-lg overflow-hidden"
                                 key={index}
                             >
                                 <img

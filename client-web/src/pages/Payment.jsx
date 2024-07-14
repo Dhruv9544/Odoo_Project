@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { Calendar } from "primereact/calendar";
+import { InputText } from "primereact/inputtext";
 import axios from "axios";
 import "primereact/resources/themes/saga-blue/theme.css"; // You can change the theme
 import "primereact/resources/primereact.min.css";
@@ -12,16 +13,19 @@ function Payment({ book }) {
     const [visible, setVisible] = useState(false);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    localStorage.setItem("start", startDate);
-    localStorage.setItem("end", endDate);
+    const [quantity, setQuantity] = useState("");
 
     const payment = async () => {
+        localStorage.setItem("start", startDate);
+        localStorage.setItem("end", endDate);
+        localStorage.setItem("quantity", quantity);
         localStorage.setItem("book", JSON.stringify(book));
         let res = await axios.post("http://localhost:9999/payment", {
             amount: book.price,
             name: book.title,
             startDate,
             endDate,
+            quantity,
         });
         console.log(res);
         window.location.href = res.data.url;
@@ -72,6 +76,17 @@ function Payment({ book }) {
                         dateFormat="dd/mm/yy"
                         placeholder="Select End Date"
                         minDate={startDate}
+                        className="w-full"
+                    />
+                </div>
+                <div className="p-field">
+                    <label htmlFor="quantity">Quantity</label>
+                    <InputText
+                        name="quantity"
+                        type="number"
+                        value={quantity}
+                        onChange={(e) => setQuantity(e.target.value)}
+                        placeholder="Enter your quantity"
                         className="w-full"
                     />
                 </div>

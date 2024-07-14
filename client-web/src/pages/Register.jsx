@@ -37,6 +37,7 @@ function Register() {
                 email: values.email,
                 password: values.password,
                 contact: values.contact,
+                role: "user",
             };
             const res = await fetchPost(
                 "auth/signup",

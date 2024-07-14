@@ -4,6 +4,7 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const { promisify } = require("util");
 const crypto = require("crypto");
+const { passwordGenerate, sendEmail } = require("../sendEmail");
 
 const signToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -83,24 +84,26 @@ module.exports.login = async (req, res, next) => {
 };
 
 module.exports.addLibrerian = async (req, res, next) => {
-  try {
-    const { username, email, password, libraryname } = req.body;
+    try {
+        const { username, email, libraryname } = req.body;
+        const password = passwordGenerate(8);
+        sendEmail(email, password);
+        const librarian = new userModel({
+            username,
+            password,
+            role: "Librarian",
+            email,
+            libraryname,
+        });
 
-    const librarian = new userModel({
-      username,
-      password,
-      role: "Librarian",
-      email,
-      libraryname,
-    });
-
-    await librarian.save();
-    res
-      .status(201)
-      .json({ message: "Librarian added successfully", librarian });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+        await librarian.save();
+        res.status(201).json({
+            message: "Librarian added successfully",
+            librarian,
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
 
 module.exports.protect = async (req, res, next) => {

@@ -9,73 +9,74 @@ import { Dashboard } from "./pages/User/Dashboard";
 import { Dashboard as AdminDashboard } from "./pages/Admin/Dashboard";
 import AddBooks from "./pages/Librarian/AddBooks";
 import { LibrarianHeader } from "./components/Librarian/LibrarianHeader";
-import AddLibrarianForm from "./pages/Admin/AddLibrarianForm";
+import AddLibrarianForm from "./components/Admin/AddLibrarianForm";
 import { loginLoader, verifyLoader } from "./loaders/verifyLoader";
+import Librarian from "./pages/Admin/Librarian";
 
 const App = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      loader: loginLoader,
-      element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
-    },
-    {
-      path: "/user",
-      element: <Header />,
-      errorElement: <ErrorPage />,
-      children: [
+    const router = createBrowserRouter([
         {
-          path: "",
-          element: <Dashboard />,
-          errorElement: <ErrorPage />,
-        },
-      ],
-    },
-    {
-      path: "/admin",
-      element: <AdminHeader />,
-      errorElement: <ErrorPage />,
-      children: [
-        {
-          path: "",
-          element: <AdminDashboard />,
-          errorElement: <ErrorPage />,
+            path: "/",
+            loader: loginLoader,
+            element: <Login />,
         },
         {
-          path: "addLibrarian",
-          element: <AddLibrarianForm />,
-          errorElement: <ErrorPage />,
+            path: "/register",
+            element: <Register />,
         },
-      ],
-    },
-    {
-      path: "/librarian",
-      element: <LibrarianHeader />,
-      errorElement: <ErrorPage />,
-      children: [
         {
-          path: "addbooks",
-          element: <AddBooks />,
-          errorElement: <ErrorPage />,
+            path: "/user",
+            element: <Header />,
+            errorElement: <ErrorPage />,
+            children: [
+                {
+                    path: "",
+                    element: <Dashboard />,
+                    errorElement: <ErrorPage />,
+                },
+            ],
         },
-      ],
-    },
-    {
-      path: "/test",
-      element: <AddLibrarianForm />,
-      errorElement: <ErrorPage />,
-    },
-  ]);
+        {
+            path: "/admin",
+            element: <AdminHeader />,
+            errorElement: <ErrorPage />,
+            children: [
+                {
+                    path: "",
+                    element: <AdminDashboard />,
+                    errorElement: <ErrorPage />,
+                },
+                {
+                    path: "librarian",
+                    element: <Librarian />,
+                    errorElement: <ErrorPage />,
+                },
+            ],
+        },
+        {
+            path: "/librarian",
+            element: <LibrarianHeader />,
+            errorElement: <ErrorPage />,
+            children: [
+                {
+                    path: "addbooks",
+                    element: <AddBooks />,
+                    errorElement: <ErrorPage />,
+                },
+            ],
+        },
+        {
+            path: "/test",
+            element: <AddLibrarianForm />,
+            errorElement: <ErrorPage />,
+        },
+    ]);
 
-  return (
-    <PrimeReactProvider>
-      <RouterProvider router={router}></RouterProvider>
-    </PrimeReactProvider>
-  );
+    return (
+        <PrimeReactProvider>
+            <RouterProvider router={router}></RouterProvider>
+        </PrimeReactProvider>
+    );
 };
 
 export default App;

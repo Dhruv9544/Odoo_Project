@@ -9,7 +9,7 @@ module.exports.addBook = catchAsync(async (req, res, next) => {
 });
 
 module.exports.getBooks = catchAsync(async (req, res, next) => {
-  const bookings = await bookModel.find();
+  const bookings = await bookModel.find(req.query);
   res.json(bookings);
 });
 
@@ -28,7 +28,7 @@ module.exports.searchBook = catchAsync(async (req, res, next) => {
       searchCriteria.genre = { $regex: genre, $options: "i" };
     }
 
-    const books = await Book.find(searchCriteria);
+    const books = await bookModel.find(searchCriteria);
     res.status(200).json(books);
   } catch (error) {
     res.status(500).json({ error: error.message });

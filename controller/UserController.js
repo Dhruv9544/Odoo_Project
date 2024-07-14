@@ -34,10 +34,10 @@ module.exports.signup = async (req, res, next) => {
   console.log(req.body);
   try {
     const newUser = await userModel.create({
-      name: req.body.username,
+      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      role: "user",
+      role: req.body.role,
       contact: req.body.contact,
     });
 

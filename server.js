@@ -4,6 +4,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 //dbconnection
 require("./config/dbconfig").getDbconnection();
+const userRoutes = require("./routes/userRoutes");
 const app = express();
 app.use(cors());
 app.use(express.static("public"));

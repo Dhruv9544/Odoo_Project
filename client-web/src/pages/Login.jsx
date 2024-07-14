@@ -1,22 +1,21 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { Button } from "primereact/button";
+import { fetchPost } from "../apis/fetch";
 import { Dropdown } from "primereact/dropdown";
-const initialValues = {
-    email: "",
-    password: "",
-    role: "",
-};
+import { Button } from "primereact/button";
 
-const Login = () => {
-    const dispatch = useDispatch();
+function Login() {
+    const initialValues = {
+        email: "",
+        password: "",
+        role: "",
+    };
 
     const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: initialValues,
-        validationSchema: LoginValidationSchemas,
         onSubmit: async (values, action) => {
             const res = await fetchPost(
                 "auth/login",
@@ -40,9 +39,7 @@ const Login = () => {
                         <div className="py-[10.375rem] px-[6.5rem] text-center ">
                             {/* <Link className=" inline-block" to=""></Link> */}
 
-                            <span className="inline-block mx-auto">
-                                {<img src={logo} alt="symbol" />}
-                            </span>
+                            <span className="inline-block mx-auto"></span>
                         </div>
                     </div>
 
@@ -108,6 +105,10 @@ const Login = () => {
                                                 {
                                                     label: "User",
                                                     value: "user",
+                                                },
+                                                {
+                                                    label: "Librarian",
+                                                    value: "librarian",
                                                 },
                                                 {
                                                     label: "Admin",
@@ -200,6 +201,6 @@ const Login = () => {
             </div>
         </>
     );
-};
+}
 
 export default Login;

@@ -33,11 +33,11 @@ const bookSchema = new mongoose.Schema(
       required: true,
     },
     available: {
-      type: Number,
+      type: Boolean,
       required: true,
     },
     image: {
-      type: Boolean,
+      type: String,
       require: true,
     },
     createdAt: {

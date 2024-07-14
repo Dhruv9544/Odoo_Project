@@ -1,4 +1,5 @@
 const userModel = require("../model/usermodel");
+const catchAsync = require("../utils/catchAsync");
 
 module.exports.getLibrary = catchAsync(async (req, res, next) => {
   try {

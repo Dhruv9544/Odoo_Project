@@ -63,18 +63,10 @@ export const LibrarianHeader = () => {
               Profile
             </Link>
           </div>
+
           <div className=" hover:shadow-white hover:shadow-md">
             <Link
-              to={"addbooks"}
-              className="flex items-center active-nav-link text-white py-4 pl-6 nav-item gap-2 focus:outline-none focus:shadow-md focus:shadow-gray-500"
-            >
-              <FaMoneyCheckAlt />
-              Add Books
-            </Link>
-          </div>
-          <div className=" hover:shadow-white hover:shadow-md">
-            <Link
-              to={"books"}
+              to={"allbooks"}
               className="flex items-center active-nav-link text-white py-4 pl-6 nav-item gap-2 focus:outline-none focus:shadow-md focus:shadow-gray-500"
             >
               <FaMoneyBillTrendUp />

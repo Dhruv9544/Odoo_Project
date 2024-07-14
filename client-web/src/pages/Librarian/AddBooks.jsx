@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
-const AddBooks = () => {
+const AddBooks = ({ getBooks, visible }) => {
   const navigate = useNavigate();
 
   const initialValues = {
@@ -50,11 +50,11 @@ const AddBooks = () => {
             ["image/jpg", "image/jpeg", "image/png"].includes(value.type))
       ),
     price: Yup.number()
-      .required("Quantity is required")
-      .min(1, "Quantity must be at least 1"),
+      .required("Price is required")
+      .min(1, "Price must be at least 1"),
   });
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values, { resetForm }) => {
     console.log("Form data", values);
 
     const formData = new FormData();
@@ -87,6 +87,11 @@ const AddBooks = () => {
         navigate("/user");
       });
     }
+    if (res) {
+      getBooks();
+      visible();
+      resetForm();
+    }
     console.log(res);
   };
 
@@ -95,8 +100,8 @@ const AddBooks = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-6">Book Form</h1>
+    <div className="max-w-lg mx-auto mt-1">
+      <h1 className="text-2xl font-bold mb-6 text-center">Book Form</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -249,7 +254,7 @@ const AddBooks = () => {
                 type="checkbox"
                 id="available"
                 name="available"
-                className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                className="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 "
               />
               <label
                 htmlFor="available"

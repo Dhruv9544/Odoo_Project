@@ -17,96 +17,108 @@ import BookMainpage from "./pages/User/BookMainpage";
 import Checkout from "./pages/User/Checkout";
 import Analysis from "./components/Admin/Analysis/Analysis";
 import History from "./pages/User/History";
+import LibrarianAllBooks from "./pages/Librarian/LibrarianAllBooks";
+import Profile from "./pages/Profile";
 
 const App = () => {
-    const router = createBrowserRouter([
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      loader: loginLoader,
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/user",
+      element: <Header />,
+      errorElement: <ErrorPage />,
+      children: [
         {
-            path: "/",
-            loader: loginLoader,
-            element: <Login />,
+          path: "",
+          element: <Dashboard />,
+          errorElement: <ErrorPage />,
         },
         {
-            path: "/register",
-            element: <Register />,
+          path: "books",
+          element: <AllBooks />,
+          errorElement: <ErrorPage />,
         },
         {
-            path: "/user",
-            element: <Header />,
-            errorElement: <ErrorPage />,
-            children: [
-                {
-                    path: "",
-                    element: <Dashboard />,
-                    errorElement: <ErrorPage />,
-                },
-                {
-                    path: "books",
-                    element: <AllBooks />,
-                    errorElement: <ErrorPage />,
-                },
-                {
-                    path: "books/:name",
-                    element: <BookMainpage />,
-                    errorElement: <ErrorPage />,
-                },
-                {
-                    path: "history",
-                    element: <History />,
-                    errorElement: <ErrorPage />,
-                },
-            ],
+          path: "books/:name",
+          element: <BookMainpage />,
+          errorElement: <ErrorPage />,
         },
         {
-            path: "/admin",
-            element: <AdminHeader />,
-            errorElement: <ErrorPage />,
-            children: [
-                {
-                    path: "",
-                    element: <AdminDashboard />,
-                    errorElement: <ErrorPage />,
-                },
-                {
-                    path: "librarian",
-                    element: <Librarian />,
-                    errorElement: <ErrorPage />,
-                },
-                {
-                    path: "analysis",
-                    element: <Analysis />,
-                    errorElement: <ErrorPage />,
-                },
-            ],
+          path: "history",
+          element: <History />,
+          errorElement: <ErrorPage />,
         },
         {
-            path: "/librarian",
-            element: <LibrarianHeader />,
-            errorElement: <ErrorPage />,
-            children: [
-                {
-                    path: "addbooks",
-                    element: <AddBooks />,
-                    errorElement: <ErrorPage />,
-                },
-            ],
+          path: "profile",
+          element: <Profile />,
+          errorElement: <ErrorPage />,
+        },
+      ],
+    },
+    {
+      path: "/admin",
+      element: <AdminHeader />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "",
+          element: <AdminDashboard />,
+          errorElement: <ErrorPage />,
         },
         {
-            path: "/test",
-            element: <AddBooks />,
-            errorElement: <ErrorPage />,
+          path: "librarian",
+          element: <Librarian />,
+          errorElement: <ErrorPage />,
         },
         {
-            path: "/payment_success",
-            element: <Checkout />,
-            errorElement: <ErrorPage />,
+          path: "analysis",
+          element: <Analysis />,
+          errorElement: <ErrorPage />,
         },
-    ]);
+      ],
+    },
+    {
+      path: "/librarian",
+      element: <LibrarianHeader />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "addbooks",
+          element: <AddBooks />,
+          errorElement: <ErrorPage />,
+        },
+        {
+          path: "allbooks",
+          element: <LibrarianAllBooks />,
+          errorElement: <ErrorPage />,
+        },
+      ],
+    },
+    {
+      path: "/test",
+      element: <AddBooks />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/payment_success",
+      element: <Checkout />,
+      errorElement: <ErrorPage />,
+    },
+  ]);
 
-    return (
-        <PrimeReactProvider>
-            <RouterProvider router={router}></RouterProvider>
-        </PrimeReactProvider>
-    );
+  return (
+    <PrimeReactProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </PrimeReactProvider>
+  );
 };
 
 export default App;

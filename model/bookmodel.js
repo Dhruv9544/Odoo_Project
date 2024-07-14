@@ -39,6 +39,9 @@ const bookSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    price: {
+      type: Number,
+    },
     createdAt: {
       type: Date,
       default: Date.now,

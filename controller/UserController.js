@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel");
+const userModel = require("../model/usermodel");
 const jwt = require("jsonwebtoken");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
@@ -34,14 +34,11 @@ module.exports.signup = async (req, res, next) => {
   console.log(req.body);
   try {
     const newUser = await userModel.create({
-      name: req.body.name,
+      name: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      state: req.body.state,
       role: "user",
-      district: req.body.district,
       contact: req.body.contact,
-      stripe_id: req.body.stripeId || "",
     });
 
     // const token = signToken(newUser._id);

@@ -98,10 +98,7 @@ module.exports.addLibrerian = async (req, res, next) => {
     });
 
     await librarian.save();
-    res.status(201).json({
-      message: "Librarian added successfully",
-      librarian,
-    });
+    res.json({ data: librarian, msg: "Librariyan added", rcode: 200 });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -16,9 +16,9 @@ app.use(express.json());
 app.use("/auth", userRoutes);
 app.use("", bookRoutes);
 app.use("/library", libraryRoutes);
-app.use("/payments", paymentRoutes);
+app.use("/payment", paymentRoutes);
 const PORT = process.env.PORT || 9999;
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

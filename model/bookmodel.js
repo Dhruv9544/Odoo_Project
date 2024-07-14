@@ -1,3 +1,4 @@
+const { timeStamp } = require("console");
 const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema({
@@ -34,11 +35,7 @@ const bookSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  addedAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
+  createdAt: {
     type: Date,
     default: Date.now,
   },

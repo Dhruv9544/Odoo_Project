@@ -88,7 +88,6 @@ function Datatable({
                         onChange={(e) => onGlobalFilterChange(e)}
                         placeholder="Search"
                     />
-                    <FaSearch />
                 </span>
 
                 <Button

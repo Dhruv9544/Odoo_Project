@@ -23,12 +23,14 @@ function History() {
     ];
     return (
         <div className="p-5">
-            <div className="h-1 text-center">Past Record</div>
+            <div className="font-bold text-3xl text-center">Past Record</div>
             <Datatable
                 array={datatableArray}
                 data={data.lessThanToday}
             ></Datatable>
-            <div>Current Record</div>
+            <div className="font-bold text-3xl text-center mt-8">
+                Current Record
+            </div>
             <Datatable
                 array={datatableArray}
                 data={data.greaterThanOrEqualToToday}

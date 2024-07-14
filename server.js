@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./config/dbConfig");
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
-connectDB();
+//dbconnection
+require("./config/dbconfig").getDbconnection();
 const app = express();
 app.use(cors());
 app.use(express.static("public"));
